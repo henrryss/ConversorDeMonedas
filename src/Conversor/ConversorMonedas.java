@@ -1,5 +1,7 @@
 package Conversor;
 
+import java.math.BigDecimal;
+import java.math.MathContext;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -8,23 +10,23 @@ public class ConversorMonedas {
     List<Moneda> listaMoneda = new ArrayList();
 
     public ConversorMonedas() {
-        listaMoneda.add(new Moneda("Dolar", "$", "Estados Unidos", 1.0, "USD", "Dólares"));
-        listaMoneda.add(new Moneda("Euro", "€", "Europa", 0.91, "EUR", "Euros"));
-        listaMoneda.add(new Moneda("Libra Esterlina", "£", "Reino Unido", 0.78, "GBP", "Libras Esterlinas"));
-        listaMoneda.add(new Moneda("Yen Japones", "¥", "Japón", 142.08, "JPY", "Yen japonés"));
-        listaMoneda.add(new Moneda("Won surcoreano", "₩", "Corea del Sur", 1298.37, "KRW", "Won surcoreano"));
-        listaMoneda.add(new Moneda("Sol", "S/", "Perú", 3.61, "PEN", "Soles"));
-        listaMoneda.add(new Moneda("Real Brasileño", "R$", "Brasil", 4.90, "BRL", "Reales"));
+        listaMoneda.add(new Moneda("Dolar", "$", "Estados Unidos",new BigDecimal(1) , "USD", "Dólares"));
+        listaMoneda.add(new Moneda("Euro", "€", "Europa",new BigDecimal(0.91) , "EUR", "Euros"));
+        listaMoneda.add(new Moneda("Libra Esterlina", "£", "Reino Unido", new BigDecimal(0.78), "GBP", "Libras Esterlinas"));
+        listaMoneda.add(new Moneda("Yen Japones", "¥", "Japón", new BigDecimal(142.08), "JPY", "Yen japonés"));
+        listaMoneda.add(new Moneda("Won surcoreano", "₩", "Corea del Sur", new BigDecimal(1298.37), "KRW", "Won surcoreano"));
+        listaMoneda.add(new Moneda("Sol", "S/", "Perú", new BigDecimal(3.61), "PEN", "Soles"));
+        listaMoneda.add(new Moneda("Real Brasileño", "R$", "Brasil", new BigDecimal(4.90), "BRL", "Reales"));
     }
 
-    public String Convertir(String MonedaOrigen, String MonedaDestino, Double Cantidad) {
+    public String Convertir(String MonedaOrigen, String MonedaDestino, BigDecimal Cantidad) {
         Moneda monedaOrigen = getMoneda(MonedaOrigen);
         Moneda monedaDestino = getMoneda(MonedaDestino);//Moneda de Origen se convierte a Dolar
-        Double CantidadEnDolar = Cantidad / monedaOrigen.getTasaDeCambio();
+        BigDecimal CantidadEnDolar = Cantidad.divide(monedaOrigen.getTasaDeCambio(),new MathContext(4))  ;
         //Dolar se covierte a Moneda Destino
-        Double CantidadFinal = CantidadEnDolar * monedaDestino.getTasaDeCambio();
+        BigDecimal CantidadFinal = CantidadEnDolar.multiply(monedaDestino.getTasaDeCambio()) ;
 
-        return (CantidadFinal == 1.0)
+        return (CantidadFinal.compareTo(new BigDecimal(1))==0) //comparamos si la cantidad final en dolares es igual a 1
                 ? "Tienes " + monedaDestino.getSimbolo() + " " + String.format("%.0f", CantidadFinal) + " " + monedaDestino.getNombreMoneda()
                 : "Tienes " + monedaDestino.getSimbolo() + " " + String.format("%.2f", CantidadFinal) + " " + monedaDestino.getNombrePlural();
 

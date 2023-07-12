@@ -1,6 +1,7 @@
 package Conversor;
 
 import java.awt.HeadlessException;
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 import javax.swing.JOptionPane;
@@ -23,7 +24,7 @@ public class main {
     private static void input(Object opcion) {
         try {
             if (opcion.equals(tipoConversion[0])) {
-                Double valor = Double.valueOf(JOptionPane.showInputDialog(null, "Ingrese la cantidad de dinero que deseas convertir:", "input", JOptionPane.QUESTION_MESSAGE));
+                BigDecimal valor = new BigDecimal(JOptionPane.showInputDialog(null, "Ingrese la cantidad de dinero que deseas convertir:", "input", JOptionPane.QUESTION_MESSAGE));
                 ConversorMonedas cm = new ConversorMonedas();
                 List listaMonedas = cm.getListaMonedas();
                 listaMonedas.remove("Soles");

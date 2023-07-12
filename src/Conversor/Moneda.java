@@ -3,6 +3,9 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
 package Conversor;
+
+import java.math.BigDecimal;
+
 /**
  *
  * @author henrr
@@ -12,15 +15,17 @@ public class Moneda {
     private String nombreMoneda;
     private String simbolo;
     private String pais;
-    private Double tasaDeCambio; //precio de la moneda a 1 dolar
+    
+    private BigDecimal tasaDeCambio;
     private String sigla;
     private String nombrePlural;
 
-    public Moneda(String nombreMoneda, String simbolo, String pais, Double tasaDeCambio, String sigla, String nombrePlural) {
+    public Moneda(String nombreMoneda, String simbolo, String pais, BigDecimal tasaDeCambio, String sigla, String nombrePlural) {
         this.nombreMoneda = nombreMoneda;
         this.simbolo = simbolo;
         this.pais = pais;
-        this.tasaDeCambio = tasaDeCambio;
+        //this.tasaDeCambio = tasaDeCambio;
+        this.tasaDeCambio=tasaDeCambio;
         this.sigla = sigla;
         this.nombrePlural = nombrePlural;
     }
@@ -49,11 +54,11 @@ public class Moneda {
         this.pais = pais;
     }
 
-    public Double getTasaDeCambio() {
+    public BigDecimal getTasaDeCambio() {
         return tasaDeCambio;
     }
 
-    public void setTasaDeCambio(Double tasaDeCambio) {
+    public void setTasaDeCambio(BigDecimal tasaDeCambio) {
         this.tasaDeCambio = tasaDeCambio;
     }
 
