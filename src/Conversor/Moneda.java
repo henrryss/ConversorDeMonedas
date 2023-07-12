@@ -1,14 +1,10 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package Conversor;
 
 import java.math.BigDecimal;
 
 /**
  *
- * @author henrr
+ * @author HenrrySS
  */
 public class Moneda {
 
@@ -24,7 +20,6 @@ public class Moneda {
         this.nombreMoneda = nombreMoneda;
         this.simbolo = simbolo;
         this.pais = pais;
-        //this.tasaDeCambio = tasaDeCambio;
         this.tasaDeCambio=tasaDeCambio;
         this.sigla = sigla;
         this.nombrePlural = nombrePlural;
