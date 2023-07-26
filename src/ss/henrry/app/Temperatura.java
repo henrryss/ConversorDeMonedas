@@ -1,4 +1,4 @@
-package Conversor;
+package ss.henrry.app;
 
 public class Temperatura {
 
