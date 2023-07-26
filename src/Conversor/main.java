@@ -1,6 +1,5 @@
 package Conversor;
 
-import java.awt.HeadlessException;
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
@@ -18,6 +17,8 @@ public class main {
         Object opcion = JOptionPane.showInputDialog(null, "Seleccione la opcion de conversion", "Menu", JOptionPane.QUESTION_MESSAGE, null, tipoConversion, tipoConversion[0]);
         if (opcion != null) {
             input(opcion);
+        } else {
+            DialogFinPrograma();
         }
     }
 
@@ -25,6 +26,9 @@ public class main {
         try {
             if (opcion.equals(tipoConversion[0])) {
                 BigDecimal valor = new BigDecimal(JOptionPane.showInputDialog(null, "Ingrese la cantidad de dinero que deseas convertir:", "input", JOptionPane.QUESTION_MESSAGE));
+                if ((valor.compareTo(BigDecimal.ZERO)) == -1) {
+                    throw new IllegalArgumentException("El valor tiene que ser mayor a 0, por favor vuelva a ingresar correctamente");
+                }
                 ConversorMonedas cm = new ConversorMonedas();
                 List listaMonedas = cm.getListaMonedas();
                 listaMonedas.remove("Soles");
@@ -52,10 +56,17 @@ public class main {
                 String seleccion = JOptionPane.showInputDialog(null, "Elija la moneda a la que deseas convertir tu dinero", "Monedas", JOptionPane.PLAIN_MESSAGE, null, opciones.toArray(), opciones.get(0)).toString();
                 mostrarResultado(ct.Convertir(seleccion.substring(seleccion.indexOf(" ") + 1, seleccion.indexOf(" a")), seleccion.substring(seleccion.indexOf("a ") + 2, seleccion.length()), valor));
             }
-        } catch (HeadlessException | NumberFormatException e) {
+        } catch (NumberFormatException e) {
             JOptionPane.showMessageDialog(null, "El valor ingresado no es numerico", "Error", JOptionPane.ERROR_MESSAGE);
             input(opcion);
+        } catch (IllegalArgumentException i) {
+            JOptionPane.showMessageDialog(null, i.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+            input(opcion);
+        } catch (NullPointerException ex) {
+            iniciarAplicacion();
+
         }
+
     }
 
     private static void mostrarResultado(String texto) {
@@ -63,8 +74,12 @@ public class main {
         if (JOptionPane.showConfirmDialog(null, "¿Quiere continuar?", "Selecciona una opción", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE, null) == 0) {
             iniciarAplicacion();
         } else {
-            JOptionPane.showMessageDialog(null, "Programa Terminado");
+            DialogFinPrograma();
         }
 
+    }
+
+    private static void DialogFinPrograma() {
+        JOptionPane.showMessageDialog(null, "Programa Terminado");
     }
 }

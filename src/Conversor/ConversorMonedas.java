@@ -23,13 +23,12 @@ public class ConversorMonedas {
         Moneda monedaOrigen = getMoneda(MonedaOrigen);
         Moneda monedaDestino = getMoneda(MonedaDestino);//Moneda de Origen se convierte a Dolar
         BigDecimal CantidadEnDolar = Cantidad.divide(monedaOrigen.getTasaDeCambio(),new MathContext(4))  ;
-        //Dolar se covierte a Moneda Destino
+        //Dolar se convierte a Moneda Destino
         BigDecimal CantidadFinal = CantidadEnDolar.multiply(monedaDestino.getTasaDeCambio()) ;
 
         return (CantidadFinal.compareTo(new BigDecimal(1))==0) //comparamos si la cantidad final en dolares es igual a 1
                 ? "Tienes " + monedaDestino.getSimbolo() + " " + String.format("%.0f", CantidadFinal) + " " + monedaDestino.getNombreMoneda()
                 : "Tienes " + monedaDestino.getSimbolo() + " " + String.format("%.2f", CantidadFinal) + " " + monedaDestino.getNombrePlural();
-
     }
 
     public List getListaMonedas() {
