@@ -31,7 +31,7 @@ El conversor de Temperatura, realiza la converion de 5 temperaturas:
 ###  En MAC o Linux
   *  Ejecutar el archivo [ConversorONE.jar](https://github.com/henrryss/ConversorDeMonedas/raw/main/ConversorONE.jar)
   
-## 🔨 Funcionadad
+## 🔨 Funcionalidad
   
 <p align="center">
   <img src="https://github.com/henrryss/ConversorDeMonedas/assets/10361166/b36c5814-3cd7-4376-bf57-a11b53eec871" alt="vista Previa">
